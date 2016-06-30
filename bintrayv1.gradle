@@ -4,7 +4,7 @@ version = libraryVersion
 
 if (project.hasProperty("android")) { // Android libraries
 
-   task sourcesJar1(type: Jar) {
+   task sourcesJarDY(type: Jar) {
         classifier = 'sources'
 
         from{
@@ -16,9 +16,12 @@ if (project.hasProperty("android")) { // Android libraries
         }
     }
 
-    task javadoc(type: Javadoc) {
+    task javadocDY(type: Javadoc) {
         source = android.sourceSets.main.java.srcDirs
         classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+        include("**/DYApi.java")
+        include("**/DYListenerItf.java")
+        include("**/DYUserData.java")
     }
 } else { // Java libraries
     task sourcesJar(type: Jar, dependsOn: classes) {
@@ -27,14 +30,14 @@ if (project.hasProperty("android")) { // Android libraries
     }
 }
 
-task javadocJar(type: Jar, dependsOn: javadoc) {
+task javadocJarDY(type: Jar, dependsOn: javadocDY) {
     classifier = 'javadoc'
-    from javadoc.destinationDir
+    from javadocDY.destinationDir
 }
 
 artifacts {
-    archives javadocJar
-    archives sourcesJar1
+    archives javadocJarDY
+    archives sourcesJarDY
 }
 
 // Bintray
