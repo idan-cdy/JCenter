@@ -8,7 +8,7 @@ if (project.hasProperty("android")) { // Android libraries
         classifier = 'sources'
 
         from{
-            def files = [ file('build/intermediates/packaged-classes/release/classes.jar')]
+            def files = [ file('build/intermediates/bundles/release/classes.jar')]
 
             files.collect {
                 it.isDirectory() ? it : zipTree(it)
